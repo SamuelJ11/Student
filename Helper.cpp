@@ -113,7 +113,7 @@ vector<string> Helper::prefixMatch(string course_name, const map<string, pair<in
         
         if (compareByPrefix(course_name, key, r))  // Use compareByPrefix to check for a match
         {
-            matches.push_back(itr->first);  // add the original course_name to the matches vector		
+            matches.push_back(itr->first);  // Add the original course_name to the matches vector		
         }
     }
 
