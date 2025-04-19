@@ -1,0 +1,305 @@
+/*
+ * File: Student.cpp
+ * Course: CS216-005
+ * Project: GPA Calculator
+ * Purpose: Provide the implementation of the Student class
+ */
+
+#include "Student.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <limits>
+
+using namespace std;
+
+Student::Student()
+{
+	GPA = 0.0;
+}
+
+void Student::import_file(string filename)
+{
+    ifstream in_file;
+    in_file.open(filename);
+
+    if (!in_file.good())
+    {
+        cout << "Warning: Cannot open file named " << filename << "!" << endl;
+    }
+	else
+	{		
+		string line, course_name;
+		int credits;
+		char grade;    
+		while (getline(in_file, line))  // Read the entire line
+		{
+			if (!line.empty())
+			{
+				istringstream iss(line);
+
+				if (line.find(":") == string::npos) // If there's no colon in the line
+				{
+					cout << "Error: Missing colon delimiter." << endl;
+				}
+				else if (!getline(iss, course_name, ':') || course_name.empty())
+				{
+					cout << "Error: Invalid or missing course name." << endl;
+				}
+				else if (!(iss >> credits)) 
+				{
+					cout << "Error: Credits is not a valid integer." << endl;
+					iss.clear(); 
+					iss.ignore(numeric_limits<std::streamsize>::max(), '\n'); 
+				}		
+				else
+				{
+					iss >> grade;			
+					grade = toupper(grade); 
+					auto course_info = make_pair(credits, grade);
+
+					int result = Helper::validate_pair(course_info);
+					if (result)
+					{
+						Grades[course_name] = course_info;
+						cout << course_name << " imported successfully." << endl;
+					}
+				}
+			}
+		}	
+	}
+}
+
+void Student::export_file(string filename)
+{
+	ofstream out_file;
+	out_file.open(filename);
+
+	if (!out_file.good())
+	{
+		cout << "Warning: Cannot open file named " << filename << "!" << endl;
+	}
+	else
+	{
+		for (auto itr = Grades.begin(); itr != Grades.end(); ++itr)
+		{
+			out_file << itr->first << ":";
+			out_file << itr->second.first << " ";
+			out_file << itr->second.second << endl;
+		}
+
+		out_file.close();
+	}	
+}
+
+void Student::add_course(string course_name, const int &credits, const char &grade)
+{
+	if (course_name.empty()) 
+	{
+		cout << "Error: Expecting a non-null value for course name." << endl;
+	}
+	else
+	{
+		char grade_upper = toupper(grade);
+		auto course_info = make_pair(credits, grade_upper);
+
+		int valid_info = Helper::validate_pair(course_info);
+		if (valid_info)
+		{
+			Grades[course_name] = course_info;
+		}	
+	} 
+}
+
+void Student::remove_course(string course_name)
+{
+	if (course_name.empty()) 
+    {
+        cout << "Error: Expecting a non-null value for course name." << endl;
+    } 
+	else if (Grades.empty())
+	{
+		cout << "No courses found." << endl;
+	}
+	else
+	{
+		vector<string> matches = Helper::prefixMatch(course_name, Grades); 
+		if (matches.empty()) 
+		{
+			cout << "No courses found matching the given course name!" << endl;
+		}
+		else 
+		{
+			for (const string& matched_course : matches) // For each matched course, display the grade
+			{			
+				auto itr = Grades.find(matched_course);				
+				Grades.erase(matched_course);
+			}
+		}
+	}
+}
+
+void Student::change_grade(string course_name, char grade)
+{
+	if (course_name.empty()) 
+    {
+        cout << "Error: Expecting a non-null value for course name." << endl;
+    }
+	else if (Grades.empty())
+	{
+		cout << "No courses found." << endl;
+	}
+	else
+	{
+		int valid_grade = Helper::validate_grade(grade);	
+		if (valid_grade)
+		{
+			vector<string> matches = Helper::prefixMatch(course_name, Grades); 
+			if (matches.empty()) 
+			{
+				cout << "No courses found matching the given course name!" << endl;
+			}
+			else
+			{
+				for (const string& matched_course : matches) // For each matched course, change the grade
+				{
+					auto itr = Grades.find(matched_course);					
+					itr->second.second = toupper(grade);  							
+				}
+			}  
+		}				
+	}
+}
+
+void Student::find_courses(char grade) const
+{
+	if (Grades.empty())
+	{
+		cout << "No courses found." << endl;
+	}
+	else
+	{
+		int valid_grade = Helper::validate_grade(grade);
+		if (valid_grade)
+		{
+			vector<string> matchingCourses; 
+
+			for (auto itr = Grades.begin(); itr != Grades.end(); ++itr)
+			{
+				if (itr->second.second == toupper(grade))
+				{
+					matchingCourses.push_back(itr->first);
+				}
+			}
+
+			if (!matchingCourses.empty())
+			{
+				cout << "The courses in which you received a(n) " << "'" << (char)toupper(grade) << "'" << " are: " << endl;
+
+				for (const string& course : matchingCourses)
+				{
+					cout << course << endl;
+				}
+			}
+			else
+			{
+				cout << "No courses found with the grade " << "'" << (char)toupper(grade) << "'" << "." << endl;
+			}
+		}			
+	}	
+}
+
+void Student::find_grade(string course_name) const
+{
+	if (course_name.empty()) 
+    {
+        cout << "Error: Expecting a non-null value for course name." << endl;		
+    } 
+	else if (Grades.empty())
+	{
+		cout << "No courses found." << endl;		
+	}
+	else
+	{
+		vector<string> matches = Helper::prefixMatch(course_name, Grades); 
+		if (matches.empty()) 
+		{
+			cout << "No courses found matching the given course name!" << endl;
+		}
+		else 
+		{
+			for (const string& matched_course : matches) // For each matched course, display the grade
+			{			
+				auto itr = Grades.find(matched_course);
+				if (itr != Grades.end()) 
+				{
+					cout << "Your grade in " << matched_course << " is: " << itr->second.second << endl;
+				}
+			}
+		}
+	}    
+}
+
+void Student::calculate_GPA()
+{
+	int total_credits = 0;
+	int total_quality_points = 0;
+
+	for (auto itr = Grades.begin(); itr != Grades.end(); ++itr)
+	{
+		int quality_points = 0;
+		char grade = itr->second.second;
+
+		switch (grade)
+		{
+			case 'A':
+				quality_points = 4;
+				break;
+			case 'B':
+				quality_points = 3;
+				break;
+			case 'C':
+				quality_points = 2;
+				break;
+			case 'D':
+				quality_points = 1;
+				break;
+			case 'F':
+				quality_points = 0;
+				break;
+		}
+
+		total_quality_points += (itr->second.first * quality_points);
+		total_credits += itr->second.first;
+	}
+
+	if (total_credits != 0)
+	{
+		GPA = static_cast<double>(total_quality_points) / total_credits;		
+	}
+	else
+	{
+		GPA = 0.0;
+	}
+}
+
+double Student::get_GPA() const
+{
+	return GPA;
+}
+
+void Student::print_courses() const
+{
+	if (Grades.empty())
+	{
+		cout << "No courses found." << endl;
+	}
+	else
+	{
+		cout << "Your previously completed courses are:" << endl;
+		for (auto itr = Grades.begin(); itr != Grades.end(); ++itr)
+		{			
+			cout << itr->first << endl;		
+		}
+	}	
+}
