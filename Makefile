@@ -1,12 +1,15 @@
-HEADERS = Student.h Helper.h
-OBJECTS = $(HEADERS:.h=.o)
-MAINSOURCE = Main.cpp
-MAINOBJ = $(MAINSOURCE:.cpp=.o)
+CXX = g++
+CXXFLAGS = -g -Iinclude
+
+HEADERS = include/Student.h include/Helper.h
+OBJECTS = source/Main.o source/Student.o source/Helper.o
+SOURCES = source/Main.cpp source/Student.cpp source/Helper.cpp
+
 EXEC = Student
 
-$(EXEC): $(OBJECTS) $(MAINOBJ)
-	g++ -g $^ -o $@ 
-%.o: %.cpp $(Headers)
-	g++ -g -c $< -o $@
+$(EXEC): $(OBJECTS) 
+	$(CXX) $(CXXFLAGS) $^ -o $@ 
+source/%.o: source/%.cpp $(HEADERS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 clean:
-	rm *.o 
+	rm source/*.o 
