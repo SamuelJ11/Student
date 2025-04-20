@@ -1,8 +1,8 @@
 /* File: Student.h
- * Course: CS215-005
  * Project: GPA Calculator
  * Purpose: To calculate a student's GPA and perform basic what-if score operations
  * Author: Samuel Aboud
+ * Date: 4/19/2025
  */
 
 #include "Helper.h"

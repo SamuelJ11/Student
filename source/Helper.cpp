@@ -1,8 +1,8 @@
 /*
  * File: Helper.cpp
- * Course: CS216-005
  * Project: GPA Calculator
  * Purpose: Provide the implementation of the Helper class
+ * Date: 4/19/2025
  */
 
 #include "Helper.h"

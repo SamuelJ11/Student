@@ -1,8 +1,8 @@
 /*
  * File: Student.cpp
- * Course: CS216-005
  * Project: GPA Calculator
  * Purpose: Provide the implementation of the Student class
+ * Date: 4/19/2025
  */
 
 #include "Student.h"

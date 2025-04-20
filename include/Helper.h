@@ -1,9 +1,9 @@
 /* File: Helper.h
- * Course: CS215-005
  * Project: GPA Calculator
  * Purpose: Serve as a helper class to the Student class to perform input validation
  *          and prefix-matching
  * Author: Samuel Aboud
+ * Date: 4/19/2025
  */
 
 #include <map>

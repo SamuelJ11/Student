@@ -1,9 +1,9 @@
 /*
  * File: main.cpp
- * Course: CS216-005
  * Project: GPA Calculator
  * Purpose: Present a user-friendly interface and handle higher-order logic of calling Student class member functions
  * Author: Samuel Aboud
+ * Date: 4/19/2025
  */
 
 #include "Student.h"
