@@ -9,7 +9,7 @@ EXEC = Student
 
 $(EXEC): $(OBJECTS) 
 	$(CXX) $(CXXFLAGS) $^ -o $@ 
-source/%.o: source/%.cpp $(HEADERS)
+%.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 clean:
 	rm source/*.o 
