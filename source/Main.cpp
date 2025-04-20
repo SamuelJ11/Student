@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
 
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	                getline(cin, name);
-	                name += ".txt";
+	                name += ".config";
                     student.export_file(name);
                     
                     cout << "Configuration file saved as: " << "'" << name << "'." << endl;
