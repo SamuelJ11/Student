@@ -34,6 +34,8 @@ public:
 
     void find_grade(string course_name) const;  // access the grade that matches a given a course number
 
+    void find_credits(string course_name) const;  // access the number of credits that matches a given a course number
+
     void find_courses(char grade) const;  // access the courses that match a given grade
 
     double get_GPA() const;  // retrieve the GPA private data member

@@ -240,6 +240,37 @@ void Student::find_grade(string course_name) const
 	}    
 }
 
+void Student::find_credits(string course_name) const
+{
+	if (course_name.empty()) 
+    {
+        cout << "Error: Expecting a non-null value for course name." << endl;		
+    } 
+	else if (Grades.empty())
+	{
+		cout << "No courses found." << endl;		
+	}
+	else
+	{
+		vector<string> matches = Helper::prefixMatch(course_name, Grades); 
+		if (matches.empty()) 
+		{
+			cout << "No courses found matching the given course name!" << endl;
+		}
+		else 
+		{
+			for (const string& matched_course : matches) // For each matched course, display the number of credits
+			{			
+				auto itr = Grades.find(matched_course);
+				if (itr != Grades.end()) 
+				{
+					cout << "The number of credits for " << matched_course << " is: " << itr->second.first << endl;
+				}
+			}
+		}
+	}    
+}
+
 void Student::calculate_GPA()
 {
 	int total_credits = 0;

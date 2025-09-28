@@ -32,10 +32,11 @@ int main(int argc, char* argv[])
         cout << "B -- Change a grade." << endl;
         cout << "C -- Find all courses that match a grade." << endl;
         cout << "D -- Find a grade for a given course." << endl;
-        cout << "E -- List all courses." << endl;
-        cout << "F -- Add a course." << endl;
-        cout << "G -- Remove a course." << endl;
-        cout << "H -- Load data from a configuration file." << endl << endl;
+        cout << "E -- Find the number of credits for a given course." << endl;
+        cout << "F -- List all courses." << endl;
+        cout << "G -- Add a course." << endl;
+        cout << "H -- Remove a course." << endl;
+        cout << "I -- Load data from a configuration file." << endl << endl;
         cout << "Enter your choice: ";
 		
         char grade, input;
@@ -85,7 +86,7 @@ int main(int argc, char* argv[])
             case 'B':  // Option B: Change a grade
             {
                 cout << "For which course would you like to change your grade?" << endl;
-                cout << "Enter the name of the course corresponding to the grade you would like to change: ";
+                cout << "Enter the name of the course for which you would like to change your grade: ";
                                 
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 getline(cin, course_name);
@@ -99,7 +100,7 @@ int main(int argc, char* argv[])
             	break;
             case 'C':  // Option C: Find all courses that match a grade
             {
-                cout << "For what grade would you like all courses to match?" << endl;
+                cout << "What grade would you like all courses to match?" << endl;
                 cout << "Enter a grade: ";
 
                 cin >> grade;
@@ -109,7 +110,7 @@ int main(int argc, char* argv[])
             case 'D':  // Option D: Find a grade for a given course
             {                
                 cout << "For what course would you like to know your grade?" << endl;
-                cout << "Enter the name of the course for which you would like to know your grade: ";
+                cout << "Enter the name of the course: ";
 
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');    
                 getline(cin, course_name);
@@ -117,12 +118,23 @@ int main(int argc, char* argv[])
                 student.find_grade(course_name);
             }
                 break;
-            case 'E':  // Option E: Print student info
+            case 'E':  // Option E: Find the number of credits for a given course
+            {                
+                cout << "For what course would you like to know the number of credits?" << endl;
+                cout << "Enter the name of the course: ";
+
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');    
+                getline(cin, course_name);
+
+                student.find_credits(course_name);
+            }
+                break;
+            case 'F':  // Option E: Print student info
 			{
 				student.print_courses();
 			}                
                 break;
-            case 'F':  // Option F: Add a course
+            case 'G':  // Option F: Add a course
             {
                 cout << "Which course would you like to add?" << endl;
                 cout << "Enter the name of the course to be added: ";
@@ -149,7 +161,7 @@ int main(int argc, char* argv[])
                 }                
             }
                 break;            
-            case 'G':  // Option G: Remove a course
+            case 'H':  // Option G: Remove a course
             {
                 cout << "Which course would you like to remove?" << endl;
                 cout << "Enter the name of the course to be deleted: ";
@@ -160,7 +172,7 @@ int main(int argc, char* argv[])
                 student.remove_course(course_name);
             }
                 break;
-            case 'H':  // Option H: Load student data
+            case 'I':  // Option H: Load student data
             {
                 if (argc == 1)
                 {
