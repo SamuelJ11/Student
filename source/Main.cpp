@@ -129,7 +129,7 @@ int main(int argc, char* argv[])
                 student.find_credits(course_name);
             }
                 break;
-            case 'F':  // Option E: Print student info
+            case 'F':  // Option F: Print student info
 			{
 				student.print_courses();
 			}                
