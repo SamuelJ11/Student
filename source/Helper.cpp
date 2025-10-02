@@ -12,7 +12,7 @@ using namespace std;
 
 bool Helper::checkIfEmpty(const map<string, pair<int, char>>& Grades, const string& course_name)
 {
-    int result = 0;
+    int result = false;
     if (Grades.empty())
     {
         cout << "No courses found." << endl;
@@ -24,7 +24,7 @@ bool Helper::checkIfEmpty(const map<string, pair<int, char>>& Grades, const stri
     }
     else
     {
-        result = 1;
+        result = true;
     }
 
     return result;
