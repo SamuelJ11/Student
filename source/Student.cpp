@@ -276,7 +276,7 @@ void Student::find_credits(string course_name) const
 void Student::calculate_GPA()
 {
 	int total_credits = 0;
-	int total_quality_points = 0;
+	int course_quality_points = 0;
 
 	for (auto itr = Grades.begin(); itr != Grades.end(); ++itr)
 	{
@@ -302,13 +302,13 @@ void Student::calculate_GPA()
 				break;
 		}
 
-		total_quality_points += (itr->second.first * quality_points);
+		course_quality_points += (itr->second.first * quality_points);
 		total_credits += itr->second.first;
 	}
 
 	if (total_credits != 0)
 	{
-		GPA = static_cast<double>(total_quality_points) / total_credits;		
+		GPA = static_cast<double>(course_quality_points) / total_credits;		
 	}
 	else
 	{

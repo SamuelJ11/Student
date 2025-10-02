@@ -74,7 +74,7 @@ void Helper::removeExtraSpace(string& course_name)
             i--;  // Erase shifts everything after space to the left, decrement iterator to check for multiple spaces
         }
     }
-    
+
     course_name = trimmed;
 } 
 
