@@ -107,6 +107,7 @@ void Student::add_course(string course_name, const int &credits, const char &gra
 		if (valid_info)
 		{
 			Grades[course_name] = course_info;
+			cout << course_name << " has been added successfully." << endl;
 		}	
 	} 
 }
@@ -130,10 +131,11 @@ void Student::remove_course(string course_name)
 		}
 		else 
 		{
-			for (const string& matched_course : matches) // For each matched course, display the grade
+			for (const string& matched_course : matches) 
 			{			
 				auto itr = Grades.find(matched_course);				
 				Grades.erase(matched_course);
+				cout << matched_course << " has been removed successfully." << endl;
 			}
 		}
 	}

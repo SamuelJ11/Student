@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
         cout << "F -- List all courses." << endl;
         cout << "G -- Add a course." << endl;
         cout << "H -- Remove a course." << endl;
-        cout << "I -- Load data from a configuration file." << endl << endl;
+        cout << "I -- (Re)Load data from a configuration file." << endl << endl;
         cout << "Enter your choice: ";
 		
         char grade, input;
