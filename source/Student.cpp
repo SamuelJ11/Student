@@ -94,11 +94,7 @@ void Student::export_file(string filename)
 
 void Student::add_course(string course_name, const int &credits, const char &grade)
 {
-	if (course_name.empty()) 
-	{
-		cout << "Error: Expecting a non-null value for course name." << endl;
-	}
-	else
+	if (Helper::checkIfEmpty(Grades, course_name))
 	{
 		char grade_upper = toupper(grade);
 		auto course_info = make_pair(credits, grade_upper);
@@ -114,15 +110,7 @@ void Student::add_course(string course_name, const int &credits, const char &gra
 
 void Student::remove_course(string course_name)
 {
-	if (course_name.empty()) 
-    {
-        cout << "Error: Expecting a non-null value for course name." << endl;
-    } 
-	else if (Grades.empty())
-	{
-		cout << "No courses found." << endl;
-	}
-	else
+	if (Helper::checkIfEmpty(Grades, course_name))	
 	{
 		vector<string> matches = Helper::prefixMatch(course_name, Grades); 
 		if (matches.empty()) 
@@ -143,15 +131,7 @@ void Student::remove_course(string course_name)
 
 void Student::change_grade(string course_name, char grade)
 {
-	if (course_name.empty()) 
-    {
-        cout << "Error: Expecting a non-null value for course name." << endl;
-    }
-	else if (Grades.empty())
-	{
-		cout << "No courses found." << endl;
-	}
-	else
+	if (Helper::checkIfEmpty(Grades, course_name))
 	{
 		int valid_grade = Helper::validate_grade(grade);	
 		if (valid_grade)
@@ -175,11 +155,7 @@ void Student::change_grade(string course_name, char grade)
 
 void Student::find_courses(char grade) const
 {
-	if (Grades.empty())
-	{
-		cout << "No courses found." << endl;
-	}
-	else
+	if (Helper::checkIfEmpty(Grades))
 	{
 		int valid_grade = Helper::validate_grade(grade);
 		if (valid_grade)
@@ -213,15 +189,7 @@ void Student::find_courses(char grade) const
 
 void Student::find_grade(string course_name) const
 {
-	if (course_name.empty()) 
-    {
-        cout << "Error: Expecting a non-null value for course name." << endl;		
-    } 
-	else if (Grades.empty())
-	{
-		cout << "No courses found." << endl;		
-	}
-	else
+	if (Helper::checkIfEmpty(Grades, course_name))
 	{
 		vector<string> matches = Helper::prefixMatch(course_name, Grades); 
 		if (matches.empty()) 
@@ -244,15 +212,7 @@ void Student::find_grade(string course_name) const
 
 void Student::find_credits(string course_name) const
 {
-	if (course_name.empty()) 
-    {
-        cout << "Error: Expecting a non-null value for course name." << endl;		
-    } 
-	else if (Grades.empty())
-	{
-		cout << "No courses found." << endl;		
-	}
-	else
+	if (Helper::checkIfEmpty(Grades, course_name))
 	{
 		vector<string> matches = Helper::prefixMatch(course_name, Grades); 
 		if (matches.empty()) 
@@ -323,11 +283,7 @@ double Student::get_GPA() const
 
 void Student::print_courses() const
 {
-	if (Grades.empty())
-	{
-		cout << "No courses found." << endl;
-	}
-	else
+	if (Helper::checkIfEmpty(Grades))
 	{
 		cout << "Your previously completed courses are:" << endl;
 		for (auto itr = Grades.begin(); itr != Grades.end(); ++itr)

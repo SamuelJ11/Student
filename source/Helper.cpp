@@ -10,6 +10,26 @@
 
 using namespace std;
 
+bool Helper::checkIfEmpty(const map<string, pair<int, char>>& Grades, const string& course_name)
+{
+    int result = 0;
+    if (Grades.empty())
+    {
+        cout << "No courses found." << endl;
+        
+    }
+    else if (course_name.empty())
+    {
+        cout << "Error: Expecting a non-null value for course name." << endl;
+    }
+    else
+    {
+        result = 1;
+    }
+
+    return result;
+}
+
 bool Helper::validate_grade(char grade)
 {
 	const string VALID_GRADES = "abcdfABCDF";

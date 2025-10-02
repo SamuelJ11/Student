@@ -19,6 +19,8 @@ class Helper
 {
 public:
 
+    static bool checkIfEmpty(const map<string, pair<int, char>>& Grades, const string& course_name = "non-null"); // check if either course name or Grades map is emtpy
+
     static bool validate_pair(pair<int, char> pair); // validate pair of <credits, grade>
 
     static bool validate_grade(char valid_chars);  // validate grade info   
