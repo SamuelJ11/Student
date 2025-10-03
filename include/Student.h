@@ -20,21 +20,21 @@ public:
 
     Student();  // default constructor
     
-    void import_file(string filename);  // read student info from a onfiguration file and store info in private data member
+    void import_file(const string &filename);  // read student info from a onfiguration file and store info in private data member
     
-    void add_course(string course_name, const int &credits, const char &grade);  // insert into the map the pair of course info <credits, grade>
+    void add_course(const string &course_name, int credits, char grade);  // insert into the map the pair of course info <credits, grade>
 
-    void change_grade(string course_name, char grade);  // change the grade 
+    void change_grade(const string &course_name, char grade);  // change the grade 
 
     void calculate_GPA();  // calculate and update the GPA private data member  
 
-    void export_file(string filename);  // create a configuration file for the student
+    void export_file(const string &filename);  // create a configuration file for the student
 
-    void remove_course(string course_name);  // remove a course from the private data member
+    void remove_course(const string &course_name);  // remove a course from the private data member
 
-    void find_grade(string course_name) const;  // access the grade that matches a given a course number
+    void find_grade(const string &course_name) const;  // access the grade that matches a given a course number
 
-    void find_credits(string course_name) const;  // access the number of credits that matches a given a course number
+    void find_credits(const string &course_name) const;  // access the number of credits that matches a given a course number
 
     void find_courses(char grade) const;  // access the courses that match a given grade
 

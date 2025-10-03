@@ -66,7 +66,7 @@ bool Helper::validate_pair(pair<int, char> pair)
 	return result;	
 }
 
-void Helper::removeExtraSpace(string& course_name)
+void Helper::removeExtraSpace(string &course_name)
 {     
     int start = 0;
     int end = course_name.length() - 1;    
@@ -98,7 +98,7 @@ void Helper::removeExtraSpace(string& course_name)
     course_name = trimmed;
 } 
 
-string Helper::wordFormat(string& course_name)
+string Helper::wordFormat(string &course_name)
 {
     Helper::removeExtraSpace(course_name);
 
@@ -110,7 +110,7 @@ string Helper::wordFormat(string& course_name)
     return course_name;
 }
 
-int Helper::compareByPrefix(const string& course_name, const string& key, int r)
+int Helper::compareByPrefix(const string &course_name, const string& key, int r)
 {
     string prefix = course_name.substr(0, r);
     string key_prefix = key.substr(0, r);

@@ -18,7 +18,7 @@ Student::Student()
 	GPA = 0.0;
 }
 
-void Student::import_file(string filename)
+void Student::import_file(const string &filename)
 {
     ifstream in_file;
     in_file.open(filename);
@@ -70,7 +70,7 @@ void Student::import_file(string filename)
 	}
 }
 
-void Student::export_file(string filename)
+void Student::export_file(const string &filename)
 {
 	ofstream out_file;
 	out_file.open(filename);
@@ -92,7 +92,7 @@ void Student::export_file(string filename)
 	}	
 }
 
-void Student::add_course(string course_name, const int &credits, const char &grade)
+void Student::add_course(const string &course_name, int credits, char grade)
 {
 	if (Helper::checkIfEmpty(Grades, course_name))
 	{
@@ -108,7 +108,7 @@ void Student::add_course(string course_name, const int &credits, const char &gra
 	} 
 }
 
-void Student::remove_course(string course_name)
+void Student::remove_course(const string &course_name)
 {
 	if (Helper::checkIfEmpty(Grades, course_name))	
 	{
@@ -129,65 +129,57 @@ void Student::remove_course(string course_name)
 	}
 }
 
-void Student::change_grade(string course_name, char grade)
+void Student::change_grade(const string &course_name, char grade)
 {
-	if (Helper::checkIfEmpty(Grades, course_name))
-	{
-		int valid_grade = Helper::validate_grade(grade);	
-		if (valid_grade)
+	if (Helper::checkIfEmpty(Grades, course_name) && Helper::validate_grade(grade))
+	{	
+		vector<string> matches = Helper::prefixMatch(course_name, Grades); 
+		if (matches.empty()) 
 		{
-			vector<string> matches = Helper::prefixMatch(course_name, Grades); 
-			if (matches.empty()) 
+			cout << "No courses found matching the given course name!" << endl;
+		}
+		else
+		{
+			for (const string& matched_course : matches) // For each matched course, change the grade
 			{
-				cout << "No courses found matching the given course name!" << endl;
+				auto itr = Grades.find(matched_course);					
+				itr->second.second = toupper(grade);  							
 			}
-			else
-			{
-				for (const string& matched_course : matches) // For each matched course, change the grade
-				{
-					auto itr = Grades.find(matched_course);					
-					itr->second.second = toupper(grade);  							
-				}
-			}  
-		}				
-	}
+		}  
+	}					
 }
 
 void Student::find_courses(char grade) const
 {
-	if (Helper::checkIfEmpty(Grades))
-	{
-		int valid_grade = Helper::validate_grade(grade);
-		if (valid_grade)
+	if (Helper::checkIfEmpty(Grades) && Helper::validate_grade(grade))
+	{		
+		vector<string> matchingCourses; 
+
+		for (auto itr = Grades.begin(); itr != Grades.end(); ++itr)
 		{
-			vector<string> matchingCourses; 
-
-			for (auto itr = Grades.begin(); itr != Grades.end(); ++itr)
+			if (itr->second.second == toupper(grade))
 			{
-				if (itr->second.second == toupper(grade))
-				{
-					matchingCourses.push_back(itr->first);
-				}
+				matchingCourses.push_back(itr->first);
 			}
+		}
 
-			if (!matchingCourses.empty())
-			{
-				cout << "The courses in which you received a(n) " << "'" << (char)toupper(grade) << "'" << " are: " << endl;
+		if (!matchingCourses.empty())
+		{
+			cout << "The courses in which you received a(n) " << "'" << (char)toupper(grade) << "'" << " are: " << endl;
 
-				for (const string& course : matchingCourses)
-				{
-					cout << course << endl;
-				}
-			}
-			else
+			for (const string& course : matchingCourses)
 			{
-				cout << "No courses found with the grade " << "'" << (char)toupper(grade) << "'" << "." << endl;
+				cout << course << endl;
 			}
-		}			
+		}
+		else
+		{
+			cout << "No courses found with the grade " << "'" << (char)toupper(grade) << "'" << "." << endl;
+		}				
 	}	
 }
 
-void Student::find_grade(string course_name) const
+void Student::find_grade(const string &course_name) const
 {
 	if (Helper::checkIfEmpty(Grades, course_name))
 	{
@@ -210,7 +202,7 @@ void Student::find_grade(string course_name) const
 	}    
 }
 
-void Student::find_credits(string course_name) const
+void Student::find_credits(const string &course_name) const
 {
 	if (Helper::checkIfEmpty(Grades, course_name))
 	{

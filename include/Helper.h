@@ -29,11 +29,11 @@ public:
 
 private:
 
-    static string wordFormat(string& course_name);  // capitalize all characters in course_name for prefix matching
+    static string wordFormat(string &course_name);  // capitalize all characters in course_name for prefix matching
 
-    static void removeExtraSpace(string& course_name);  // removes the extra blank spaces(including tab) from course_name
+    static void removeExtraSpace(string &course_name);  // removes the extra blank spaces(including tab) from course_name
 
-    static int compareByPrefix(const string& course_name, const string& key, int r);  // compares the two courses in lexicographic order using only the first r characters of each prefix
+    static int compareByPrefix(const string &course_name, const string& key, int r);  // compares the two courses in lexicographic order using only the first r characters of each prefix
 };
 
 #endif // HELPER_H
