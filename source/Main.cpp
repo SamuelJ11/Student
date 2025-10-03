@@ -134,7 +134,7 @@ int main(int argc, char* argv[])
 				student.print_courses();
 			}                
                 break;
-            case 'G':  // Option F: Add a course
+            case 'G':  // Option G: Add a course
             {
                 cout << "Which course would you like to add?" << endl;
                 cout << "Enter the name of the course to be added: ";
@@ -161,7 +161,7 @@ int main(int argc, char* argv[])
                 }                
             }
                 break;            
-            case 'H':  // Option G: Remove a course
+            case 'H':  // Option H: Remove a course
             {
                 cout << "Which course would you like to remove?" << endl;
                 cout << "Enter the name of the course to be deleted: ";
@@ -172,7 +172,7 @@ int main(int argc, char* argv[])
                 student.remove_course(course_name);
             }
                 break;
-            case 'I':  // Option H: Load student data
+            case 'I':  // Option I: Load student data
             {
                 if (argc == 1)
                 {

@@ -58,8 +58,7 @@ void Student::import_file(const string &filename)
 					grade = toupper(grade); 
 					auto course_info = make_pair(credits, grade);
 
-					int result = Helper::validate_pair(course_info);
-					if (result)
+					if (Helper::validate_pair(course_info))
 					{
 						Grades[course_name] = course_info;
 						cout << course_name << " imported successfully." << endl;
@@ -99,8 +98,7 @@ void Student::add_course(const string &course_name, int credits, char grade)
 		char grade_upper = toupper(grade);
 		auto course_info = make_pair(credits, grade_upper);
 
-		int valid_info = Helper::validate_pair(course_info);
-		if (valid_info)
+		if (Helper::validate_pair(course_info))
 		{
 			Grades[course_name] = course_info;
 			cout << course_name << " has been added successfully." << endl;
