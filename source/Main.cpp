@@ -78,9 +78,8 @@ int main(int argc, char* argv[])
             	break;
             case 'A':  // Option A: Calculate your GPA
             {
-                cout << fixed << setprecision(2);
                 student.calculate_GPA();
-                cout << "Your GPA is: " << student.get_GPA() << endl;
+                cout << "Your GPA is: " << fixed << setprecision(2) << student.get_GPA() << endl;
             }
             	break;
             case 'B':  // Option B: Change a grade
