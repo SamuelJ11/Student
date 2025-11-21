@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -g -Iinclude
+CXXFLAGS = -g -I include
 
 HEADERS = include/Student.h include/Helper.h
 OBJECTS = source/Main.o source/Student.o source/Helper.o
