@@ -21,7 +21,8 @@ Student::Student()
 void Student::import_file(const string &filename)
 {
     ifstream in_file;
-    in_file.open(filename);
+	string folder = "config_files/";
+    in_file.open(folder + filename);
 
     if (!in_file.good())
     {
@@ -72,7 +73,8 @@ void Student::import_file(const string &filename)
 void Student::export_file(const string &filename)
 {
 	ofstream out_file;
-	out_file.open(filename);
+	string folder = "config_files/";
+	out_file.open(folder + filename);
 
 	if (!out_file.good())
 	{
