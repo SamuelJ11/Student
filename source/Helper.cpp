@@ -10,15 +10,25 @@
 
 using namespace std;
 
-bool Helper::checkIfEmpty(const map<string, pair<int, char>>& Grades, const string& course_name)
+bool Helper::checkIfEmpty(const map<string, pair<int, char>>& Grades)
 {
     bool result = false;
     if (Grades.empty())
     {
         cout << "No courses found." << endl;
-        
     }
-    else if (course_name.empty())
+    else
+    {
+        result = true;
+    }
+
+    return result;
+}
+
+bool Helper::checkCourseName(const string& course_name)
+{
+    bool result = false;
+    if (course_name.empty())
     {
         cout << "Error: Expecting a non-null value for course name." << endl;
     }

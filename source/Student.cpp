@@ -95,7 +95,7 @@ void Student::export_file(const string &filename)
 
 void Student::add_course(const string &course_name, int credits, char grade)
 {
-	if (Helper::checkIfEmpty(Grades, course_name))
+	if (Helper::checkCourseName(course_name))
 	{
 		char grade_upper = toupper(grade);
 		auto course_info = make_pair(credits, grade_upper);
@@ -110,7 +110,7 @@ void Student::add_course(const string &course_name, int credits, char grade)
 
 void Student::remove_course(const string &course_name)
 {
-	if (Helper::checkIfEmpty(Grades, course_name))	
+	if (Helper::checkIfEmpty(Grades) && Helper::checkCourseName(course_name))	
 	{
 		vector<string> matches = Helper::prefixMatch(course_name, Grades); 
 		if (matches.empty()) 
@@ -131,7 +131,7 @@ void Student::remove_course(const string &course_name)
 
 void Student::change_grade(const string &course_name, char grade)
 {
-	if (Helper::checkIfEmpty(Grades, course_name) && Helper::validate_grade(grade))
+	if (Helper::checkIfEmpty(Grades) && Helper::checkCourseName(course_name) && Helper::validate_grade(grade))
 	{	
 		vector<string> matches = Helper::prefixMatch(course_name, Grades); 
 		if (matches.empty()) 
@@ -181,7 +181,7 @@ void Student::find_courses(char grade) const
 
 void Student::find_grade(const string &course_name) const
 {
-	if (Helper::checkIfEmpty(Grades, course_name))
+	if (Helper::checkIfEmpty(Grades) && Helper::checkCourseName(course_name))
 	{
 		vector<string> matches = Helper::prefixMatch(course_name, Grades); 
 		if (matches.empty()) 
@@ -204,7 +204,7 @@ void Student::find_grade(const string &course_name) const
 
 void Student::find_credits(const string &course_name) const
 {
-	if (Helper::checkIfEmpty(Grades, course_name))
+	if (Helper::checkIfEmpty(Grades) && Helper::checkCourseName(course_name))
 	{
 		vector<string> matches = Helper::prefixMatch(course_name, Grades); 
 		if (matches.empty()) 
