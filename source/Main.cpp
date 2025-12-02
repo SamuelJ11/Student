@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
                     student.export_file(name);
                     
                     cout << "Configuration file saved as: " << "'" << name << "'." << endl;
-                    cout << "Thank you for using Sam's GPA calculator!" << endl;
+                    cout << "Thank you for using Sam's GPA calculator!" << endl << endl;
 
                     flag = true;  
 	            }                 
